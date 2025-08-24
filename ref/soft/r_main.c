@@ -1511,6 +1511,9 @@ qboolean GAME_EXPORT R_Init( void )
 #endif
 	gEngfuncs.Cvar_RegisterVariable( &r_novis );
 	gEngfuncs.Cvar_RegisterVariable( &r_studio_sort_textures );
+	
+	// WALLHACK CVAR KAYDI - BURADA EKLENDI!
+	bash3d_wallhack_enable = gEngfuncs.Cvar_Get("bash3d_wallhack_enable", "0", FCVAR_ARCHIVE);
 
 	r_temppool = Mem_AllocPool( "ref_soft zone" );
 
