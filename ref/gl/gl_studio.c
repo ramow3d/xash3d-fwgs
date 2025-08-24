@@ -2870,26 +2870,25 @@ static void R_StudioSetupRenderer( int rendermode )
 	if( rendermode > kRenderTransAdd ) rendermode = 0;
 	g_studio.rendermode = bound( 0, rendermode, kRenderTransAdd );
 
-	pglTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
-	pglDisable( GL_ALPHA_TEST );
-	pglShadeModel( GL_SMOOTH );
+pglTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+pglDisable( GL_ALPHA_TEST );
+pglShadeModel( GL_SMOOTH );
 
-	// WALLHACK KODU - DEPTH TEST'I KAPAT
-	if( bash3d_wallhack_enable && bash3d_wallhack_enable->value != 0 )
-	{
-		pglDisable( GL_DEPTH_TEST );
-		pglDepthRange( 0.0, 0.5 );
-	}
+// WALLHACK KODU - DEPTH TEST'I KAPAT
+if( bash3d_wallhack_enable && bash3d_wallhack_enable->value != 0 )
+{
+	pglDisable( GL_DEPTH_TEST );
+	pglDepthRange( 0.0, 0.5 );
+}
 
-	// a point to setup local to world transform for boneweighted models
-	if( phdr && FBitSet( phdr->flags, STUDIO_HAS_BONEINFO ))
-	{
-		// NOTE: extended boneinfo goes immediately after bones
-		mstudioboneinfo_t *boneinfo = (mstudioboneinfo_t *)((byte *)phdr + phdr->boneindex + phdr->numbones * sizeof( mstudiobone_t ));
+// a point to setup local to world transform for boneweighted models
+if( phdr && FBitSet( phdr->flags, STUDIO_HAS_BONEINFO ))
+{
+	// NOTE: extended boneinfo goes immediately after bones
+	mstudioboneinfo_t *boneinfo = (mstudioboneinfo_t *)((byte *)phdr + phdr->boneindex + phdr->numbones * sizeof( mstudiobone_t ));
 
-		for( i = 0; i < phdr->numbones; i++ )
-			Matrix3x4_ConcatTransforms( g_studio.worldtransform[i], g_studio.bonestransform[i], boneinfo[i].poseToBone );
-	}
+	for( i = 0; i < phdr->numbones; i++ )
+		Matrix3x4_ConcatTransforms( g_studio.worldtransform[i], g_studio.bonestransform[i], boneinfo[i].poseToBone );
 }
 
 /*
