@@ -2855,6 +2855,7 @@ static void R_StudioSetRenderModel( model_t *model )
 	RI.currentmodel = model;
 }
 
+
 /*
 ===============
 R_StudioSetupRenderer
@@ -2888,6 +2889,7 @@ static void R_StudioSetupRenderer( int rendermode )
 
 		for( i = 0; i < phdr->numbones; i++ )
 			Matrix3x4_ConcatTransforms( g_studio.worldtransform[i], g_studio.bonestransform[i], boneinfo[i].poseToBone );
+	}
 }
 
 /*
