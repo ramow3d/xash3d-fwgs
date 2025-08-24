@@ -25,6 +25,9 @@ GNU General Public License for more details.
 #define EVENT_CLIENT	5000	// less than this value it's a server-side studio events
 #define MAX_LOCALLIGHTS	4
 
+// WALLHACK CVAR EXTERNAL DECLARATION
+extern cvar_t *bash3d_wallhack_enable;
+
 typedef struct
 {
 	char		name[MAX_OSPATH];
@@ -2869,6 +2872,13 @@ static void R_StudioSetupRenderer( int rendermode )
 	pglTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
 	pglDisable( GL_ALPHA_TEST );
 	pglShadeModel( GL_SMOOTH );
+
+	// WALLHACK KODU - DEPTH TEST'I KAPAT
+	if( bash3d_wallhack_enable && bash3d_wallhack_enable->integer != 0 )
+	{
+		pglDisable( GL_DEPTH_TEST );
+		pglDepthRange( 0.0, 0.5 );
+	}
 
 	// a point to setup local to world transform for boneweighted models
 	if( phdr && FBitSet( phdr->flags, STUDIO_HAS_BONEINFO ))
