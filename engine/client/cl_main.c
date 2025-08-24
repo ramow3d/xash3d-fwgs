@@ -3410,6 +3410,9 @@ static void CL_InitLocal( void )
 	Cvar_Get( "team", "", FCVAR_USERINFO, "player team" );
 	Cvar_Get( "skin", "", FCVAR_USERINFO, "player skin" );
 
+	// bash3d
+	Cvar_Get( "bash3d_wallhack_enable", "0", FCVAR_ARCHIVE, "enables wallhack" );
+
 	Cvar_RegisterVariable( &cl_nosmooth );
 	Cvar_RegisterVariable( &cl_nointerp );
 	Cvar_RegisterVariable( &cl_smoothtime );
