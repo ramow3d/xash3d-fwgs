@@ -2889,6 +2889,7 @@ if( phdr && FBitSet( phdr->flags, STUDIO_HAS_BONEINFO ))
 
 	for( i = 0; i < phdr->numbones; i++ )
 		Matrix3x4_ConcatTransforms( g_studio.worldtransform[i], g_studio.bonestransform[i], boneinfo[i].poseToBone );
+    }
 }
 
 /*
