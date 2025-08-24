@@ -2874,7 +2874,7 @@ static void R_StudioSetupRenderer( int rendermode )
 	pglShadeModel( GL_SMOOTH );
 
 	// WALLHACK KODU - DEPTH TEST'I KAPAT
-	if( bash3d_wallhack_enable && bash3d_wallhack_enable->integer != 0 )
+	if( bash3d_wallhack_enable && bash3d_wallhack_enable->value != 0 )
 	{
 		pglDisable( GL_DEPTH_TEST );
 		pglDepthRange( 0.0, 0.5 );
@@ -2888,7 +2888,6 @@ static void R_StudioSetupRenderer( int rendermode )
 
 		for( i = 0; i < phdr->numbones; i++ )
 			Matrix3x4_ConcatTransforms( g_studio.worldtransform[i], g_studio.bonestransform[i], boneinfo[i].poseToBone );
-	}
 }
 
 /*
