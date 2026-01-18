@@ -67,7 +67,10 @@ static size_t NET_BuildMasterServerScanRequest( char *buf, size_t size, uint32_t
 		Info_SetValueForKey( info, "nat", nat ? "1" : "0", remaining );
 		Info_SetValueForKey( info, "commit", g_buildcommit, remaining );
 		Info_SetValueForKey( info, "branch", g_buildbranch, remaining );
-		Info_SetValueForKey( info, "os", Q_buildos(), remaining );
+		{
+			convar_t *fake = Cvar_Get( "cl_fake_android", "0", 0, "Force fake Android identity (0/1)" );
+			Info_SetValueForKey( info, "os", (fake && fake->value) ? "android" : Q_buildos(), remaining );
+		}
 		Info_SetValueForKey( info, "arch", Q_buildarch(), remaining );
 
 		Q_snprintf( temp, sizeof( temp ), "%d", Q_buildnum() );
