@@ -144,7 +144,7 @@ static void Sys_StackTrace( PEXCEPTION_POINTERS pInfo )
 #endif
 
 	int len = Q_snprintf( message, sizeof( message ), "Ver: " XASH_ENGINE_NAME " " XASH_VERSION " (build %i-%s-%s, %s-%s)\n",
-		Q_buildnum(), g_buildcommit, g_buildbranch, (Cvar_VariableInteger("cl_fake_android") ? "android" : Q_buildos()), Q_buildarch());
+		Q_buildnum(), g_buildcommit, g_buildbranch, Q_buildos(), Q_buildarch());
 
 	len += Q_snprintf( message + len, sizeof( message ) - len, "Crash: address %p, code %p\n",
 		pInfo->ExceptionRecord->ExceptionAddress, (void*)pInfo->ExceptionRecord->ExceptionCode );
