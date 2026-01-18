@@ -1,5 +1,6 @@
 
 #include "gl_local.h"
+#include "cvar.h"
 #if XASH_GL4ES
 #include "gl4es/include/gl4esinit.h"
 #include "gl4es/include/gl4eshint.h"
