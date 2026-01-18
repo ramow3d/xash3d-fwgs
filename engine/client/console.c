@@ -2104,7 +2104,7 @@ void Con_DrawVersion( void )
 			return;
 
 		{
-			convar_t *fake = Cvar_Get( "cl_fake_android", "0", 0, "Force fake Android identity (0/1)" );
+			convar_t *fake = Cvar_Get( "cl_fake_android", "0", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 			const char *os = (fake && fake->value) ? "android" : Q_buildos();
 			Q_snprintf( curbuild, sizeof( curbuild ),
 				XASH_ENGINE_NAME " v%i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, Q_buildarch(), Q_buildnum( ));

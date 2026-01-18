@@ -1783,7 +1783,7 @@ static void NET_DetermineLocalAddress( void )
 	hostname[sizeof(hostname) - 1] = 0;
 
 	// Ensure cvar exists and allow overriding hostname when faking Android
-	Cvar_Get( "cl_fake_android", "0", 0, "Force fake Android identity (0/1)" );
+	Cvar_Get( "cl_fake_android", "0", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 	if( Cvar_VariableInteger( "cl_fake_android" ) )
 	{
 		// Present a generic Android device name to network code
