@@ -1944,7 +1944,7 @@ static void Con_DrawSolidConsole( int lines )
 	memcpy( color, g_color_table[7], sizeof( color ));
 
 	{
-		convar_t *fake = Cvar_Get( "cl_fake_android", "0", 0, "Force fake Android identity (0/1)" );
+		convar_t *fake = Cvar_Get( "cl_fake_android", "0", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 		const char *os = (fake && fake->value) ? "android" : Q_buildos();
 		Q_snprintf( curbuild, MAX_STRING, XASH_ENGINE_NAME " %i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, Q_buildarch(), Q_buildnum( ));
 	}
@@ -2084,7 +2084,7 @@ void Con_DrawVersion( void )
 
 	if( cls.key_dest == key_menu )
 	{
-		convar_t *fake = Cvar_Get( "cl_fake_android", "0", 0, "Force fake Android identity (0/1)" );
+		convar_t *fake = Cvar_Get( "cl_fake_android", "0", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 		const char *os = (fake && fake->value) ? "android" : Q_buildos();
 		Q_snprintf( curbuild, sizeof( curbuild ),
 			"v%i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, Q_buildarch(), Q_buildnum( ));

@@ -1026,7 +1026,7 @@ void GL_InitExtensions( void )
 	// Register and respect cl_fake_android cvar: when enabled, present
 	// Android-like GL strings so remote servers/queries see an Android GPU.
 	{
-		cvar_t *fake = gEngfuncs.Cvar_Get( "cl_fake_android", "0", 0, "Force fake Android identity (0/1)" );
+		cvar_t *fake = gEngfuncs.Cvar_Get( "cl_fake_android", "0", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 		if( fake && fake->value )
 		{
 			// Common Android GPU strings — choose a generic Mali GPU.

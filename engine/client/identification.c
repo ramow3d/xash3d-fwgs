@@ -652,7 +652,7 @@ void ID_Init( void )
 #endif
 
 	// Ensure cvar exists and optionally allow forcing fake Android identity
-	Cvar_Get( "cl_fake_android", "0", 0, "Force fake Android identity (0/1)" );
+	Cvar_Get( "cl_fake_android", "0", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 
 	// If user wants to force fake Android identity (for testing/privacy),
 	// allow overriding native id generation with a deterministic fake id.
