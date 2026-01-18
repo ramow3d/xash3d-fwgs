@@ -112,7 +112,9 @@ static const feature_message_t engine_features[] =
 
 static void Host_MakeVersionString( char *out, size_t len )
 {
-	Q_snprintf( out, len, XASH_ENGINE_NAME " %i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, Q_buildos(), Q_buildarch(), Q_buildnum( ));
+	convar_t *fake = Cvar_Get( "cl_fake_android", "0", 0, "Force fake Android identity (0/1)" );
+	const char *os = (fake && fake->value) ? "android" : Q_buildos();
+	Q_snprintf( out, len, XASH_ENGINE_NAME " %i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, Q_buildarch(), Q_buildnum( ));
 }
 
 static void Host_PrintUsage( const char *exename )
