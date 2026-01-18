@@ -1238,7 +1238,13 @@ int EXPORT Host_Main( int argc, char **argv, const char *progname, int bChangeGa
 
 	Cvar_Getf( "buildnum", FCVAR_READ_ONLY, "returns a current build number", "%i", Q_buildnum_compat());
 	Cvar_Getf( "ver", FCVAR_READ_ONLY, "shows an engine version", "%i/%s (hw build %i)", PROTOCOL_VERSION, XASH_COMPAT_VERSION, Q_buildnum_compat());
-	Cvar_Getf( "host_ver", FCVAR_READ_ONLY, "detailed info about this build", "%i " XASH_VERSION " %s %s %s", Q_buildnum(), Q_buildos(), Q_buildarch(), g_buildcommit);
+	{
+		convar_t *fake = Cvar_Get( "cl_fake_android", "0", 0, "Force fake Android identity (0/1)" );
+		const char *os = (fake && fake->value) ? "android" : Q_buildos();
+		char host_ver_value[256];
+		Q_snprintf( host_ver_value, sizeof(host_ver_value), "%i " XASH_VERSION " %s %s %s", Q_buildnum(), os, Q_buildarch(), g_buildcommit);
+		Cvar_Getf( "host_ver", FCVAR_READ_ONLY, "detailed info about this build", "%s", host_ver_value);
+	}
 	Cvar_Getf( "host_lowmemorymode", FCVAR_READ_ONLY, "indicates if engine compiled for low RAM consumption (0 - normal, 1 - low engine limits, 2 - low protocol limits)", "%i", XASH_LOW_MEMORY );
 
 	Cvar_Get( "host_hl25_extended_structs",

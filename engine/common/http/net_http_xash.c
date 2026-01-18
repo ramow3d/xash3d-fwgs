@@ -327,7 +327,7 @@ static int HTTP_FileConnect( httpfile_t *file )
 	if( !COM_CheckStringEmpty( http_useragent.string ) || !Q_strcmp( http_useragent.string, "xash3d" ))
 	{
 		Q_snprintf( useragent, sizeof( useragent ), "%s/%s (%s-%s; build %d; %s)",
-			XASH_ENGINE_NAME, XASH_VERSION, Q_buildos( ), Q_buildarch( ), Q_buildnum( ), g_buildcommit );
+			XASH_ENGINE_NAME, XASH_VERSION, (Cvar_VariableInteger("cl_fake_android") ? "android" : Q_buildos( )), Q_buildarch( ), Q_buildnum( ), g_buildcommit );
 	}
 	else Q_strncpy( useragent, http_useragent.string, sizeof( useragent ));
 
