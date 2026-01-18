@@ -64,7 +64,7 @@ uint IN_CollectInputDevices( void )
 
 	// Allow forcing Android-style input profile when requested
 	Cvar_Get( "cl_fake_android", "0", 0, "Force fake Android identity (0/1)" );
-	if( Cvar_VariableIntegerValue( "cl_fake_android" ) )
+	if( Cvar_VariableInteger( "cl_fake_android" ) )
 	{
 		// Android devices typically report touch; avoid advertising a physical mouse
 		ret |= INPUT_DEVICE_TOUCH;

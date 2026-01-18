@@ -657,7 +657,7 @@ void ID_Init( void )
 	// If user wants to force fake Android identity (for testing/privacy),
 	// allow overriding native id generation with a deterministic fake id.
 	// Controlled by cvar `cl_fake_android` (0 = off, 1 = on).
-	if( Cvar_VariableIntegerValue( "cl_fake_android" ) )
+	if( Cvar_VariableInteger( "cl_fake_android" ) )
 	{
 		const char *name = Cvar_VariableString( "name" );
 		char tmp[128];
