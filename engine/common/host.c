@@ -114,7 +114,8 @@ static void Host_MakeVersionString( char *out, size_t len )
 {
 	convar_t *fake = Cvar_Get( "cl_fake_android", "1", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 	const char *os = (fake && fake->value) ? "android" : Q_buildos();
-	Q_snprintf( out, len, XASH_ENGINE_NAME " %i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, Q_buildarch(), Q_buildnum( ));
+	const char *arch = (fake && fake->value) ? "arm" : Q_buildarch();
+	Q_snprintf( out, len, XASH_ENGINE_NAME " %i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, arch, Q_buildnum( ));
 }
 
 static void Host_PrintUsage( const char *exename )
@@ -1241,8 +1242,9 @@ int EXPORT Host_Main( int argc, char **argv, const char *progname, int bChangeGa
 	{
 		convar_t *fake = Cvar_Get( "cl_fake_android", "1", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 		const char *os = (fake && fake->value) ? "android" : Q_buildos();
+		const char *arch = (fake && fake->value) ? "arm" : Q_buildarch();
 		char host_ver_value[256];
-		Q_snprintf( host_ver_value, sizeof(host_ver_value), "%i " XASH_VERSION " %s %s %s", Q_buildnum(), os, Q_buildarch(), g_buildcommit);
+		Q_snprintf( host_ver_value, sizeof(host_ver_value), "%i " XASH_VERSION " %s %s %s", Q_buildnum(), os, arch, g_buildcommit);
 		Cvar_Getf( "host_ver", FCVAR_READ_ONLY, "detailed info about this build", "%s", host_ver_value);
 	}
 	Cvar_Getf( "host_lowmemorymode", FCVAR_READ_ONLY, "indicates if engine compiled for low RAM consumption (0 - normal, 1 - low engine limits, 2 - low protocol limits)", "%i", XASH_LOW_MEMORY );

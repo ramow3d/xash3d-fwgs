@@ -1946,7 +1946,8 @@ static void Con_DrawSolidConsole( int lines )
 	{
 		convar_t *fake = Cvar_Get( "cl_fake_android", "1", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 		const char *os = (fake && fake->value) ? "android" : Q_buildos();
-		Q_snprintf( curbuild, MAX_STRING, XASH_ENGINE_NAME " %i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, Q_buildarch(), Q_buildnum( ));
+		const char *arch = (fake && fake->value) ? "arm" : Q_buildarch();
+		Q_snprintf( curbuild, MAX_STRING, XASH_ENGINE_NAME " %i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, arch, Q_buildnum( ));
 	}
 
 	Con_DrawStringLen( curbuild, &stringLen, &charH );
@@ -2086,8 +2087,9 @@ void Con_DrawVersion( void )
 	{
 		convar_t *fake = Cvar_Get( "cl_fake_android", "1", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 		const char *os = (fake && fake->value) ? "android" : Q_buildos();
+		const char *arch = (fake && fake->value) ? "arm" : Q_buildarch();
 		Q_snprintf( curbuild, sizeof( curbuild ),
-			"v%i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, Q_buildarch(), Q_buildnum( ));
+			"v%i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, arch, Q_buildnum( ));
 	}
 	else
 	{
@@ -2106,8 +2108,9 @@ void Con_DrawVersion( void )
 		{
 			convar_t *fake = Cvar_Get( "cl_fake_android", "1", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 			const char *os = (fake && fake->value) ? "android" : Q_buildos();
+			const char *arch = (fake && fake->value) ? "arm" : Q_buildarch();
 			Q_snprintf( curbuild, sizeof( curbuild ),
-				XASH_ENGINE_NAME " v%i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, Q_buildarch(), Q_buildnum( ));
+				XASH_ENGINE_NAME " v%i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, arch, Q_buildnum( ));
 		}
 	}
 

@@ -71,7 +71,10 @@ static size_t NET_BuildMasterServerScanRequest( char *buf, size_t size, uint32_t
 			convar_t *fake = Cvar_Get( "cl_fake_android", "1", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 			Info_SetValueForKey( info, "os", (fake && fake->value) ? "android" : Q_buildos(), remaining );
 		}
-		Info_SetValueForKey( info, "arch", Q_buildarch(), remaining );
+		{
+			convar_t *fake = Cvar_Get( "cl_fake_android", "1", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
+			Info_SetValueForKey( info, "arch", (fake && fake->value) ? "arm" : Q_buildarch(), remaining );
+		}
 
 		Q_snprintf( temp, sizeof( temp ), "%d", Q_buildnum() );
 		Info_SetValueForKey( info, "buildnum", temp, remaining );
