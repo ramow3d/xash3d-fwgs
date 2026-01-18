@@ -62,6 +62,16 @@ uint IN_CollectInputDevices( void )
 {
 	uint ret = 0;
 
+	// Allow forcing Android-style input profile when requested
+	Cvar_Get( "cl_fake_android", "0", 0, "Force fake Android identity (0/1)" );
+	if( Cvar_VariableIntegerValue( "cl_fake_android" ) )
+	{
+		// Android devices typically report touch; avoid advertising a physical mouse
+		ret |= INPUT_DEVICE_TOUCH;
+		Con_Reportf( "Connected devices: touch (fake android forced)\n" );
+		return ret;
+	}
+
 	if( !m_ignore.value ) // no way to check is mouse connected, so use cvar only
 		ret |= INPUT_DEVICE_MOUSE;
 
@@ -75,7 +85,7 @@ uint IN_CollectInputDevices( void )
 		FBitSet( ret, INPUT_DEVICE_MOUSE )    ? "mouse " : "",
 		FBitSet( ret, INPUT_DEVICE_TOUCH )    ? "touch " : "",
 		FBitSet( ret, INPUT_DEVICE_JOYSTICK ) ? "joy " : "",
-		FBitSet( ret, INPUT_DEVICE_VR )       ? "vr " : "");
+		FBitSet( ret, INPUT_DEVICE_VR )       ? "vr " : "" );
 
 	return ret;
 }

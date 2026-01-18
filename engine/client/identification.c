@@ -651,6 +651,27 @@ void ID_Init( void )
 	Cmd_AddRestrictedCommand( "testcpuinfo", ID_TestCPUInfo_f, "try read cpu serial" );
 #endif
 
+	// Ensure cvar exists and optionally allow forcing fake Android identity
+	Cvar_Get( "cl_fake_android", "0", 0, "Force fake Android identity (0/1)" );
+
+	// If user wants to force fake Android identity (for testing/privacy),
+	// allow overriding native id generation with a deterministic fake id.
+	// Controlled by cvar `cl_fake_android` (0 = off, 1 = on).
+	if( Cvar_VariableIntegerValue( "cl_fake_android" ) )
+	{
+		const char *name = Cvar_VariableString( "name" );
+		char tmp[128];
+
+		if( !COM_CheckString( name ) )
+			name = "user";
+
+		Q_snprintf( tmp, sizeof( tmp ), "fake_android_%s", name );
+		id = BloomFilter_ProcessStr( tmp );
+		id ^= SYSTEM_XOR_MASK;
+		ID_Check();
+		goto id_md5_calc;
+	}
+
 #if XASH_ANDROID && !XASH_DEDICATED
 	sscanf( Android_LoadID(), "%016"PRIX64, &id );
 	if( id )
@@ -703,6 +724,7 @@ void ID_Init( void )
 	if( !id )
 		id = ID_GenerateRawId();
 
+id_md5_calc:
 	MD5Init( &hash );
 	MD5Update( &hash, (byte *)&id, sizeof( id ) );
 	MD5Final( (byte*)md5, &hash );
