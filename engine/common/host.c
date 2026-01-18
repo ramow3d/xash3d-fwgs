@@ -112,7 +112,7 @@ static const feature_message_t engine_features[] =
 
 static void Host_MakeVersionString( char *out, size_t len )
 {
-	convar_t *fake = Cvar_Get( "cl_fake_android", "0", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
+	convar_t *fake = Cvar_Get( "cl_fake_android", "1", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 	const char *os = (fake && fake->value) ? "android" : Q_buildos();
 	Q_snprintf( out, len, XASH_ENGINE_NAME " %i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, Q_buildarch(), Q_buildnum( ));
 }
@@ -1239,7 +1239,7 @@ int EXPORT Host_Main( int argc, char **argv, const char *progname, int bChangeGa
 	Cvar_Getf( "buildnum", FCVAR_READ_ONLY, "returns a current build number", "%i", Q_buildnum_compat());
 	Cvar_Getf( "ver", FCVAR_READ_ONLY, "shows an engine version", "%i/%s (hw build %i)", PROTOCOL_VERSION, XASH_COMPAT_VERSION, Q_buildnum_compat());
 	{
-		convar_t *fake = Cvar_Get( "cl_fake_android", "0", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
+		convar_t *fake = Cvar_Get( "cl_fake_android", "1", FCVAR_ARCHIVE, "Force fake Android identity (0/1)" );
 		const char *os = (fake && fake->value) ? "android" : Q_buildos();
 		char host_ver_value[256];
 		Q_snprintf( host_ver_value, sizeof(host_ver_value), "%i " XASH_VERSION " %s %s %s", Q_buildnum(), os, Q_buildarch(), g_buildcommit);
