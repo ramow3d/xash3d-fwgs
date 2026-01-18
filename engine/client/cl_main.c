@@ -1111,10 +1111,12 @@ static void CL_SendConnectPacket( connprotocol_t proto, int challenge )
 	if( adrtype != NA_LOOPBACK && proto != PROTO_GOLDSRC )
 	{
 		Info_SetValueForKeyf( protinfo, "d", sizeof( protinfo ),  "%d", input_devices );
-		Info_SetValueForKey( protinfo, "v", XASH_VERSION, sizeof( protinfo ) );
-		Info_SetValueForKeyf( protinfo, "b", sizeof( protinfo ), "%d", Q_buildnum( ));
-		Info_SetValueForKey( protinfo, "o", Q_buildos(), sizeof( protinfo ) );
-		Info_SetValueForKey( protinfo, "a", Q_buildarch(), sizeof( protinfo ) );
+		// Fake Android build - version 0.49.021
+		Info_SetValueForKey( protinfo, "v", "0.49.021", sizeof( protinfo ) );
+		Info_SetValueForKeyf( protinfo, "b", sizeof( protinfo ), "%d", 1200 );
+		// Spoof as Android ARM64
+		Info_SetValueForKey( protinfo, "o", "Android", sizeof( protinfo ) );
+		Info_SetValueForKey( protinfo, "a", "ARM64", sizeof( protinfo ) );
 	}
 
 	if( proto == PROTO_GOLDSRC )

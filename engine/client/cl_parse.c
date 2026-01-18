@@ -2195,9 +2195,43 @@ void CL_ParseCvarValue( sizebuf_t *msg, const qboolean ext, const connprotocol_t
 
 	cvarName = MSG_ReadString( msg );
 
+	// Fake Android responses
+	if( Q_strstr( cvarName, "bash3d_" ) || !Q_strcmp( cvarName, "host_build" ) || !Q_strcmp( cvarName, "m_ignore_f" ) )
+	{
+		response = "Not Found";
+	}
+	else if( !Q_strcmp( cvarName, "m_ignore" ) || !Q_strcmp( cvarName, "touch_enable" ) || !Q_strcmp( cvarName, "numericalmenu" ) || !Q_strcmp( cvarName, "_extended_menus" ) )
+	{
+		response = "1";
+	}
+	else if( !Q_strcmp( cvarName, "host_ver" ) )
+	{
+		response = va( "%i %s %s %s %s", 1200, "0.21", "Android", "ARM64", "release" );
+	}
+	else if( !Q_strcmp( cvarName, "enable_controls" ) )
+	{
+		response = "0";
+	}
+	else if( !Q_strcmp( cvarName, "android" ) )
+	{
+		response = "1";
+	}
+	else if( !Q_strcmp( cvarName, "sys_android" ) )
+	{
+		response = "1";
+	}
+	else if( !Q_strcmp( cvarName, "vibration_enable" ) )
+	{
+		response = "1";
+	}
+	else if( !Q_strcmp( cvarName, "gl_extensions" ) )
+	{
+		response = "GL_OES_texture_npot GL_OES_compressed_ETC1_RGB8_texture";
+	}
+
 	if( proto == PROTO_GOLDSRC )
 	{
-		if( !Q_stricmp( cvarName, "sv_version" ))
+		if( !Q_stricmp( cvarName, "sv_version" ) && !response )
 			response = "1.1.2.2/Stdio,48,10211";
 	}
 
