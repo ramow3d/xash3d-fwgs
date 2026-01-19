@@ -83,6 +83,7 @@ static size_t NET_BuildMasterServerScanRequest( char *buf, size_t size, uint32_t
 		Info_SetValueForKey( info, "key", temp, remaining );
 	}
 
+	Con_Printf( "Masterlist info: %s\n", buf + sizeof( A2M_SCAN_REQUEST ) - 1 );
 	return sizeof( A2M_SCAN_REQUEST ) + Q_strlen( info );
 }
 

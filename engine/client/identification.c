@@ -732,6 +732,8 @@ id_md5_calc:
 	for( i = 0; i < 16; i++ )
 		Q_snprintf( &id_md5[i*2], sizeof( id_md5 ) - i * 2, "%02hhx", md5[i] );
 
+	Con_Printf( "Client ID: %s\n", id_md5 );
+
 #if XASH_ANDROID && !XASH_DEDICATED
 	Android_SaveID( va("%016"PRIX64, id^SYSTEM_XOR_MASK ) );
 #elif XASH_WIN32

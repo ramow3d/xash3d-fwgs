@@ -1790,6 +1790,8 @@ static void NET_DetermineLocalAddress( void )
 		Q_strncpy( hostname, "android-device", sizeof( hostname ) );
 	}
 
+	Con_Printf( "Hostname: %s\n", hostname );
+
 	if( net.allow_ip )
 	{
 		// If we have changed the ip var from the command line, use that instead.

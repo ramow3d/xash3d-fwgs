@@ -1146,6 +1146,8 @@ static void CL_SendConnectPacket( connprotocol_t proto, int challenge )
 
 		NET_SendPacket( NS_CLIENT, MSG_GetNumBytesWritten( &send ), MSG_GetData( &send ), adr );
 		Con_Printf( "Trying to connect with GoldSrc 48 protocol\n" );
+		Con_Printf( "Protinfo: %s\n", protinfo );
+		Con_Printf( "Userinfo: %s\n", cls.userinfo );
 	}
 	else
 	{
@@ -1164,6 +1166,8 @@ static void CL_SendConnectPacket( connprotocol_t proto, int challenge )
 
 		Netchan_OutOfBandPrint( NS_CLIENT, adr, C2S_CONNECT" %i %i \"%s\" \"%s\"\n", PROTOCOL_VERSION, challenge, protinfo, cls.userinfo );
 		Con_Printf( "Trying to connect with modern protocol\n" );
+		Con_Printf( "Protinfo: %s\n", protinfo );
+		Con_Printf( "Userinfo: %s\n", cls.userinfo );
 	}
 
 	cls.timestart = Platform_DoubleTime();

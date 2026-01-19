@@ -116,6 +116,7 @@ static void Host_MakeVersionString( char *out, size_t len )
 	const char *os = (fake && fake->value) ? "android" : Q_buildos();
 	const char *arch = (fake && fake->value) ? "arm" : Q_buildarch();
 	Q_snprintf( out, len, XASH_ENGINE_NAME " %i/" XASH_VERSION " (%s-%s build %i)", PROTOCOL_VERSION, os, arch, Q_buildnum( ));
+	Con_Printf( "Version string: %s\n", out );
 }
 
 static void Host_PrintUsage( const char *exename )
