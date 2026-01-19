@@ -1037,10 +1037,6 @@ void GL_InitExtensions( void )
 		}
 	}
 
-	Con_Printf( "GL Vendor: %s\n", glConfig.vendor_string );
-	Con_Printf( "GL Renderer: %s\n", glConfig.renderer_string );
-	Con_Printf( "GL Version: %s\n", glConfig.version_string );
-
 	pglGetIntegerv( GL_MAJOR_VERSION, &major );
 	pglGetIntegerv( GL_MINOR_VERSION, &minor );
 	if( !major && glConfig.version_string )
